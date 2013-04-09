@@ -1,0 +1,5 @@
+package __ENTITY_LEVEL_PACKAGE__.attribute;
+
+public interface CreateAttributes {
+
+}

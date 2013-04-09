@@ -1,0 +1,55 @@
+package __ENTITY_LEVEL_PACKAGE__;
+
+import __ENTITY_LEVEL_PACKAGE__.attribute.CreateAttributes;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
+import org.springframework.roo.addon.tostring.RooToString;
+
+@RooJavaBean
+@RooToString
+@RooJpaActiveRecord(table = "users", finders = { "findUsersByEmailAddress" })
+public class User {
+
+    @NotNull
+    @Size(min = 1)
+    @Column(name = "first_name")
+    private String firstName;
+
+    @NotNull
+    @Size(min = 1)
+    @Column(name = "last_name")
+    private String lastName;
+
+    @NotNull
+    @Size(min = 1)
+    @Column(name = "email_address", unique = true)
+    private String emailAddress;
+
+    // Using groups: http://blog.codeleak.pl/2011/03/how-to-jsr303-validation-groups-in.html, http://forum.springsource.org/showthread.php?115559-Validation-using-groups-in-Spring-3-0
+    @NotNull(groups = CreateAttributes.class) // Submission is required only on create
+    @Size(min = 1)
+    @Column(name = "password")
+    private String password;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    @Column(name = "activation_date")
+    private Date activationDate;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
+
+   	@Column(name = "locked")
+    private Boolean locked;
+
+}

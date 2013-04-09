@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+
+	<spring:message code="label_sign_up" htmlEscape="false" var="title" />
+	<util:panel id="title" title="${title}">
+
+		<form:form action="" method="POST" commandName="form">
+			<field:input field="firstName"
+				id="c___ENTITY_LEVEL_PACKAGE_WEB___User_firstName" min="1"
+				required="true" z="?" />
+			<field:input field="lastName"
+				id="c___ENTITY_LEVEL_PACKAGE_WEB___User_lastName" min="1"
+				required="true" z="?" />
+			<field:input field="emailAddress"
+				id="c___ENTITY_LEVEL_PACKAGE_WEB___User_emailAddress"
+				min="1" required="true" validationMessageCode="field_invalid_email"
+				z="?" />
+			<field:input field="password"
+				id="c___ENTITY_LEVEL_PACKAGE_WEB___User_password" min="5"
+				required="true" type="password" z="?" />
+			<field:input field="retypePassword" id="c_retype_password"
+				type="password" z="?" />
+        	${captcha_form}
+        	
+        	<div class="submit">
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ValidateAllDecoration({
+						elementId : 'proceed',
+						event : 'onclick'
+					}));
+				</script>
+				<spring:message code="button_submit" htmlEscape="false"
+					var="submit_label" />
+				<input id="proceed" type="submit"
+					value="${fn:escapeXml(submit_label)}" />
+			</div>
+		</form:form>
+
+	</util:panel>
+
+</div>
